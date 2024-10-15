@@ -1,0 +1,8 @@
+# Dockerfile.frontend
+FROM php:7.4-apache
+
+# คัดลอกไฟล์ทั้งหมดใน frontend ไปยัง Apache root
+COPY ./frontend /var/www/html/
+
+# เปิด port 80 สำหรับเว็บเซิร์ฟเวอร์
+EXPOSE 80

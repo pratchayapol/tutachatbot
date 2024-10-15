@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      bot-network:
+        ipv4_address: 172.18.0.10  # ตัวอย่างการกำหนด IP ให้ frontend
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    networks:
+      bot-network:
+        ipv4_address: 172.18.0.11  # กำหนด IP ให้ backend
+
+networks:
+  bot-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16  # กำหนด subnet
